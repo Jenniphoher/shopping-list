@@ -8,7 +8,7 @@ const pool = require('../modules/pool.js');
 // GET Route
 router.get('/', (req, res) => {
     const queryText = `SELECT * from "shoppingList"
-                        ORDER BY "id"`;
+                        ORDER BY "name";`;
 
     pool.query(queryText).then((result) => {
         res.send(result.rows);
@@ -39,7 +39,22 @@ router.post(`/`, (req, res) => {
 })
 // PUT Route
 
+router.put('/:id', (req, res) => {
+    const data = req.params.id;
+    const sqlText = `UPDATE "shoppingList"
+                    SET "isBought" NOT "isBought"
+                    WHERE "id" = $1;`
 
+    const sqlValues = [data];
+    pool.query(sqlText, sqlValues) 
+    .then((result) => {
+        res.sendStatus(200);
+    })
+    .catch((err) => {
+        console.log('Database error in PUT data:', err);
+        res.sendStatus(500);
+    })
+})
 
 // DELETE Route
 

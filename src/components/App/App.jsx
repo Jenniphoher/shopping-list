@@ -3,6 +3,7 @@ import axios from 'axios'
 import AddItemForm from '../AddItemForm/AddItemForm.jsx';
 import Header from '../Header/Header.jsx'
 import './App.css';
+import ResetList from '../ResetList/ResetList.jsx'
 
 
 
@@ -31,6 +32,7 @@ function App() {
             <main>
                 <AddItemForm getShoppingList={getShoppingList}/>
                 <h1>Shopping List</h1>
+                <ResetList />
                 <ul>
                     {shoppingList.map((item) => {
                         return (<li key={item.id}> 
